@@ -1,0 +1,474 @@
+// _variables.scss
+$primary: #5A6CFF;
+$success: #198754;
+$danger: #dc3545;
+$gray-600: #6c757d;
+$light: #f8f9fa;
+$border-color: #057ef7;
+
+$shadow-color: rgba(15, 23, 42, 0.08);
+
+/* Elevation levels */
+$shadow-xs: 0 1px 2px $shadow-color;
+$shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.10);
+$shadow-md: 0 4px 10px rgba(15, 23, 42, 0.12);
+$shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.16);
+$shadow-xl: 0 12px 40px rgba(15, 23, 42, 0.20);
+
+main {
+    width: 100%;
+    height: 100%;
+    background: #F8FAFF;
+    font-family: "Circular-Std";
+    overflow: hidden;
+  }
+.body {
+    width: 100%;
+    height: 100%;
+    background: #F8FAFF;
+    font-family: "Circular-Std";
+  }
+.timeline-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid #ddd;
+  height: 700px;
+   width: 65% !important;
+   position: relative;
+  width: 100%;
+  margin-left: 36.2%;
+  
+  // padding-left: 450px;
+  
+}
+
+.timeline-table {
+  border-collapse: collapse;
+  min-width: max-content;
+  height: 1000px;
+  margin-top: -1px;
+ // width: 600px;
+
+  
+}
+th{
+  border-bottom: 1px solid #eee;  
+  // border-left: 1px solid #eee;
+  position: relative;
+  
+}
+
+td {
+  border-left: 1px solid #eee;
+  padding: 6px;
+  width: 160px;
+  vertical-align: top;
+  height: 100px;
+}
+
+.sticky-col {
+  position: fixed;
+ // top: 30%;
+  left: 5%;
+  background: #f9fcfe;
+ 
+    min-width: 450px !important;
+  height: 50px; 
+   border-right: 1px solid #eee;
+ border-top: 1px solid #eee;
+ border-left: 1px solid #eee;
+   color: #94A3B8;
+   font-size: 20px;
+   font-weight: lighter;
+    padding: 10px;
+   
+}
+.t-header{
+ color: #94A3B8;
+   font-size: 18px;
+   font-weight: 50;
+  
+}
+
+
+.wc-label {
+   background: #f9fcfe;
+ height: 60px;
+  padding-left: 30px;
+  color: #000;
+  padding-top: 15px;
+  margin-top: 0px;
+  font-size: 18px;
+   font-weight: lighter;
+   // border-top: 1px solid #eee;
+
+}
+
+.cell-work-order {
+  background: #10b981;
+  color: #fff;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+  width: 200px;
+}
+.timeline-cell {
+  cursor: pointer;
+  transition: background 0.15s ease;
+  height: 60px;
+  
+}
+
+.timeline-cell:hover {
+  background: rgba(79,93,255,0.3);
+  border-radius: 10px;
+  
+  
+}
+
+.cell-info {
+  margin-top: 12px;
+  padding: 10px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 13px;
+}
+/* Highlight entire row on hover */
+.work-center-row:hover td {
+  background-color: #EEF1FF;
+}
+
+/* Keep sticky column visually consistent */
+.work-center-row:hover .sticky-col {
+  background-color: #f7f7f7;
+}
+
+/* Smooth transition */
+.work-center-row td {
+  transition: background-color 0.15s ease;
+}
+
+
+
+.head {
+ //background: lightblue;
+ justify-content: flex-start;
+ margin-left: 2%;
+
+width: 100%;
+height: 100%;
+padding-left: 40px;
+padding-top: 70px;
+}
+.calendar-logo {
+  height: 45px;
+  width: auto;
+}
+.logo {
+  height: 80px;
+  width: 100px;
+  background-image: url('../../assets/logo.png'); /* no ../ */
+  background-size: contain;    /* or cover */
+  background-repeat: no-repeat;
+  background-position: left center; /* adjust */
+  position: absolute;
+  left: 5%;
+ 
+}
+
+
+::ng-deep .ng-arrow {
+  display: none;
+}
+
+::ng-deep .ng-arrow-wrapper::after {
+  content: '\F282';
+  font-family: 'bootstrap-icons';
+  font-size: 10px;
+  color: #4F5DFF;
+  font-weight: bold;
+  display: inline-block;
+}
+::ng-deep .ng-arrow-wrapper::after {
+  transition: transform 0.2s ease;
+}
+
+::ng-deep .ng-select-opened .ng-arrow-wrapper::after {
+  transform: rotate(180deg);
+}
+
+::ng-deep .work-order-select .ng-select-container {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  height: 30px;
+  padding: 0.25rem;
+  //border: 1px solid #0d6efd;
+  align-items: center;
+  padding: 5px;
+  justify-content: center;
+  background-color: white;
+  color: $primary;
+ 
+  margin-bottom: 5px;
+ 
+}
+::ng-deep .work-order-select{
+    width: 80px;
+    align-items: center;
+    display: flex;
+    padding: 1px;
+  
+    
+    
+
+ 
+}
+::ng-deep .work-order-select .ng-dropdown-panel {
+  width: 280px;
+  transform: translate(-80px, 5px);
+  box-shadow: $shadow-lg;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+ 
+}
+
+::ng-deep .work-order-select .ng-option {
+  border-radius: 10px;
+ 
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: white;
+  
+
+  
+}
+.wc-label.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: default;
+}
+
+::ng-deep .work-order-select .ng-option-selected {
+  font-weight: 400;
+  color: $primary;
+  
+}
+.timescale{
+  width: 80px;
+ // height: 30px;
+  justify-content: center;
+  background-color: #E6EAF2;
+  align-items: center;
+  padding: 5px;
+  color: #94A3B8;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.zoom{
+  width: 160px;
+  height: 30px;
+  display: flex;
+  box-shadow: $shadow-sm;
+  border-radius: 4px;
+  position: absolute;
+  top: 10%;
+  left: 5%
+}
+
+.list{
+  width: 50%;
+  transform: translate(50px,0);
+}
+.list-group .list-group-item{
+  background: #F8FAFF;
+  height: 70px;
+  padding: 20px;
+  padding-left: 50px;
+}
+/* ================= CURRENT TIME / MONTH LINES ================= */
+.current-day-line,
+.current-month-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #4f5dff;
+  border-radius: 1px;
+  box-shadow: 0 0 6px rgba(79, 93, 255, 0.6);
+  transition: left 300ms ease;
+  animation: pulse 1.5s infinite;
+  height: 600px;
+}
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+.timeline-row {
+  position: relative;
+  padding: 0;
+  height: 44px;
+}
+
+.timeline-grid {
+  display: flex;
+  height: 100%;
+}
+
+.timeline-cell {
+  width: 160px; // same as day/week/month width
+  border-right: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+.row-timeline {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  height: 32px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.work-order-bar {
+  position: absolute;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 6px;
+
+  background: #4f46e5;
+  color: white;
+  font-size: 12px;
+  line-height: 28px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  pointer-events: auto;
+  cursor: pointer;
+}
+.work {
+  position: absolute;
+ top: 7%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  z-index: 1000;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+ // background-color: #057ef7;
+}
+
+.status-bar {
+  border-radius: 4px;
+  padding: 5px;
+  margin-right: 5px;
+}
+/* ================= MENU ================= */
+::ng-deep .menu.mat-mdc-menu-panel {
+  min-width: 240px;
+  padding: 6px 0;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e6e8ec;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+::ng-deep .menu.mat-mdc-menu-panel {
+  min-width: 240px;
+  padding: 6px 0;
+  border-radius: 8px;
+
+  background: #ffffff;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+
+  border: 1px solid #e6e8ec;
+  margin-top: 10px;
+  //margin-right: -160px;
+  //margin-left: 10px;
+  
+  
+  
+}
+::ng-deep .mat-mdc-menu-panel{
+//margin-left: 160px;
+}
+
+/* Menu items */
+::ng-deep .menu .mat-mdc-menu-item {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #2e2e2e;
+  border-radius: 6px;
+  margin: 2px 6px;
+width: 230px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+
+  
+}
+
+/* Hover */
+::ng-deep .menu .mat-mdc-menu-item:hover {
+  background-color: #f1f3f9;
+  color: #4f5dff;
+}
+
+/* Optional icons inside menu */
+::ng-deep .menu .mat-mdc-menu-item i {
+  font-size: 14px;
+  color: #6b7280;
+  min-width: 160px;
+}
+
+/* Divider support */
+::ng-deep .menu .mat-mdc-menu-divider {
+  margin: 6px 12px;
+  border-top-color: #e5e7eb;
+}
+
+/* ================= ACTION BUTTON ================= */
+.action-btn {
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(73, 74, 74, 0.14);
+  }
+
+  i {
+    font-size: 18px;
+    color: transparent;
+
+    &:hover {
+      color: #4f4f4f;
+    }
+  }
+}
+.actions{
+     display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                width: 120px;
+}
