@@ -1,59 +1,106 @@
-# Calendar
+# Work Order Scheduler
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+A **Work Order Schedule Timeline** frontend component built with **Angular** for visualizing and managing work orders across work centers.
 
-## Development server
+This project implements an interactive timeline with zoom levels (Day/Week/Month), work order bars with statuses, and slide‑out panels for creating/editing work orders.
 
-To start a local development server, run:
+---
+
+## 🚀 Demo
+
+(Include a Loom or video link here demonstrating core functionality such as timeline views, create/edit/delete flows.)
+
+---
+
+## 🧩 Features
+
+✔ Interactive timeline showing work orders by date  
+✔ Day/Week/Month zoom levels  
+✔ Work order status badges (Open, In Progress, Complete, Blocked)  
+✔ Slide‑out Create/Edit panel with validation  
+✔ Overlap detection per work center  
+✔ Sample data with multiple work centers  
+✔ Responsive UI and fixed left panel
+
+---
+
+## 📦 Stack
+
+- **Angular 21** (generated with Angular CLI)  
+- **TypeScript** (strict mode)  
+- **SCSS** styling  
+- **ng‑select** for dropdowns  
+- **@ng‑bootstrap/ng‑bootstrap** for date picker
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
 
 ```bash
+npm install -g @angular/cli
+node -v
+npm -v
+```
+
+### Installation
+
+### Clone the repo:
+
+```bash
+git clone https://github.com/TimothyM-18/WORK-ORDER-SCHEDULER.git
+cd WORK-ORDER-SCHEDULER
+```
+---
+### Intsall dependencies
+
+```
+npm install
+```
+
+### Running the App
+
+```
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Open Browser
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+http://localhost:4200
 ```
+---
+## Sample Data
 
-## Building
+### Includes:
 
-To build the project run:
+✔ 5+ work centers  
+✔ 8+ work orders  
+✔ All 4 status types   
+✔ Range of dates and non-overlapping entries   
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📋 Usage / Timeline Interactions
 
-## Running unit tests
+### Timeline Controls
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- **Timescale dropdown:** Switch between **Day**, **Week**, or **Month** views to zoom in or out.  
+- **Horizontal scroll:** Pan across dates to see past or future work orders.  
+- **Today indicator:** Vertical line showing the current date for quick reference.  
 
-```bash
-ng test
-```
+### Managing Work Orders
 
-## Running end-to-end tests
+- **Create Work Order:** Click on an empty area of a work center row → Fill the slide-out form → Click **Create**.  
+- **Edit Work Order:** Click the three-dot menu on an existing work order → Select **Edit** → Modify details → Click **Save**.  
+- **Delete Work Order:** Click the three-dot menu on a work order → Select **Delete** → Confirm deletion.  
+- **Overlap Validation:** The app prevents creating or editing a work order that overlaps with an existing one on the same work center. An error message will appear if there’s a conflict.  
 
-For end-to-end (e2e) testing, run:
+### Additional Tips
 
-```bash
-ng e2e
-```
+- Hover over a row or work order for visual highlights.  
+- The left panel with work center names stays fixed while scrolling horizontally.  
+- Newly created or edited work orders appear immediately in the timeline.  
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
