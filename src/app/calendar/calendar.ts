@@ -8,12 +8,14 @@ import {
   ElementRef
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatListModule} from '@angular/material/list';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
+import { SlideFormComponent } from '../slide-form/slide-form';
+import { SlideFormService } from '../slide-form/slide-form.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 // import mock data for work centers and orders
 import {
@@ -52,7 +54,7 @@ type ViewMode = 'month' | 'week' | 'day';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, MatGridListModule, MatListModule, NgSelectModule,  FormsModule, MatButtonModule, MatMenuModule],
+  imports: [CommonModule, MatGridListModule, MatListModule, NgSelectModule, SlideFormComponent, FormsModule, MatButtonModule, MatMenuModule],
   templateUrl: './calendar.html',
   styleUrls: ['./calendar.scss']
 })
@@ -100,8 +102,8 @@ export class Calendar implements OnInit {
   // options for the time scale selector
   TimeScale = [
     { id: 'month', name: 'Month' },
-    { id: 'week',  name: 'Week' },
-    { id: 'day',   name: 'Day' }
+    { id: 'week', name: 'Week' },
+    { id: 'day', name: 'Day' }
   ];
 
   // currently selected scale (synced with viewMode)
@@ -129,18 +131,23 @@ export class Calendar implements OnInit {
 
   // mapping from status to background color generator (alpha supported)
   statusColors: Record<WorkOrderStatus, (alpha?: number) => string> = {
-    Blocked:      (a = 0.3) => `rgba(255,193,7,${a})`,
+    Blocked: (a = 0.3) => `rgba(255,193,7,${a})`,
     In_progress: (a = 0.3) => `rgba(79,93,255,${a})`,
-    Complete:    (a = 0.3) => `rgba(40,219,0,${a})`,
-    Open:        (a = 0.3) => `rgba(47,138,229,${a})`
+    Complete: (a = 0.3) => `rgba(40,219,0,${a})`,
+    Open: (a = 0.3) => `rgba(47,138,229,${a})`
   };
+
+  // ---------- CONSTRUCTOR ----------
+
+  // inject the slide form service for opening edit/create forms
+  constructor(private slideFormService: SlideFormService) { }
 
   // ---------- LIFECYCLE HOOKS ----------
 
   // initialize component: load orders, set range, scroll to current
   ngOnInit() {
     this.workOrders = this.mapWorkOrders();
-    
+
     this.resetRange();
     setTimeout(() => this.scrollToCurrent(), 0);
     this.selectedScale = this.viewMode;
@@ -179,8 +186,8 @@ export class Calendar implements OnInit {
       units.push(new Date(d));
 
       if (this.viewMode === 'month') d.setMonth(d.getMonth() + 1);
-      if (this.viewMode === 'week')  d.setDate(d.getDate() + 7);
-      if (this.viewMode === 'day')   d.setDate(d.getDate() + 1);
+      if (this.viewMode === 'week') d.setDate(d.getDate() + 7);
+      if (this.viewMode === 'day') d.setDate(d.getDate() + 1);
     }
 
     return units;
@@ -191,6 +198,48 @@ export class Calendar implements OnInit {
     if (this.viewMode === 'day') return this.dayColumnWidth;
     if (this.viewMode === 'week') return this.weekColumnWidth;
     return this.monthColumnWidth;
+  }
+
+  // ---------- PUBLIC METHODS ----------
+
+  // open the slide-in form for CREATE (payload is Date) or EDIT (payload is WorkOrder)
+  openSlideForm(workCenterId: string, payload?: Date | WorkOrder) {
+
+    // CREATE mode: payload is a Date, set default start/end based on view mode
+    if (payload instanceof Date) {
+      const start = new Date(payload);
+      const end = new Date(start);
+
+      // determine default end date based on current view mode
+      switch (this.viewMode) {
+        case 'day': end.setDate(start.getDate() + 1); break;
+        case 'week': end.setDate(start.getDate() + 7); break;
+        case 'month': end.setMonth(start.getMonth() + 1); break;
+      }
+
+      // pass existing ranges for overlap validation in the form
+      this.slideFormService.openForm({
+        workCenterId,
+        startDate: start.toISOString().slice(0, 10),
+        endDate: end.toISOString().slice(0, 10),
+        existingRanges: this.getRangesForWorkCenter(workCenterId)
+      });
+
+      return;
+    }
+
+    // 🟡 EDIT mode: payload is WorkOrder, pre-populate form
+    if (payload) {
+      this.slideFormService.openForm({
+        docId: payload.docId,
+        workCenterId,
+        name: payload.name,
+        status: payload.status,
+        startDate: payload.startDate,
+        endDate: payload.endDate,
+        existingRanges: this.getRangesForWorkCenter(workCenterId)
+      });
+    }
   }
 
   // when a cell is clicked, set selection and log existing ranges for debugging
@@ -214,7 +263,7 @@ export class Calendar implements OnInit {
   // format timeline labels per view mode
   formatUnitDate(unit: Date): string {
     if (this.viewMode === 'month') return unit.toLocaleString('default', { month: 'long', year: 'numeric' });
-    if (this.viewMode === 'week')  return `Week of ${unit.toDateString()}`;
+    if (this.viewMode === 'week') return `Week of ${unit.toDateString()}`;
     return unit.toDateString();
   }
 
@@ -242,11 +291,11 @@ export class Calendar implements OnInit {
     });
 
     // ===============================
-    // ✅ SAVE HERE - in-memory operations
+    // SAVE HERE - in-memory operations
     // ===============================
 
     if (payload.docId) {
-      // ✏️ EDIT EXISTING: replace item in array
+      // EDIT EXISTING: replace item in array
       const index = this.workOrders.findIndex(
         wo => wo.docId === payload.docId
       );
@@ -292,19 +341,19 @@ export class Calendar implements OnInit {
     if (this.viewMode === 'month') {
       const m = this.startOfMonth(now);
       this.rangeStart = this.addMonths(m, -6); // show ~1 year centered
-      this.rangeEnd   = this.addMonths(m, 6);
+      this.rangeEnd = this.addMonths(m, 6);
     }
 
     if (this.viewMode === 'week') {
       const w = this.startOfWeek(now);
       this.rangeStart = this.addWeeks(w, -8);
-      this.rangeEnd   = this.addWeeks(w, 12);
+      this.rangeEnd = this.addWeeks(w, 12);
     }
 
     if (this.viewMode === 'day') {
       const d = this.startOfDay(now);
       this.rangeStart = this.addDays(d, -this.DAY_PAST);
-      this.rangeEnd   = this.addDays(d, this.DAY_FUTURE);
+      this.rangeEnd = this.addDays(d, this.DAY_FUTURE);
     }
   }
 
@@ -322,8 +371,8 @@ export class Calendar implements OnInit {
   // extend the visible timeline into the future
   appendFuture() {
     if (this.viewMode === 'month') this.rangeEnd = this.addMonths(this.rangeEnd, this.MONTH_CHUNK);
-    if (this.viewMode === 'week')  this.rangeEnd = this.addWeeks(this.rangeEnd, this.WEEK_CHUNK);
-    if (this.viewMode === 'day')   this.rangeEnd = this.addDays(this.rangeEnd, this.DAY_CHUNK);
+    if (this.viewMode === 'week') this.rangeEnd = this.addWeeks(this.rangeEnd, this.WEEK_CHUNK);
+    if (this.viewMode === 'day') this.rangeEnd = this.addDays(this.rangeEnd, this.DAY_CHUNK);
   }
 
   // extend into the past and keep scroll position stable
@@ -331,8 +380,8 @@ export class Calendar implements OnInit {
     const prevWidth = container.scrollWidth;
 
     if (this.viewMode === 'month') this.rangeStart = this.addMonths(this.rangeStart, -this.MONTH_CHUNK);
-    if (this.viewMode === 'week')  this.rangeStart = this.addWeeks(this.rangeStart, -this.WEEK_CHUNK);
-    if (this.viewMode === 'day')   this.rangeStart = this.addDays(this.rangeStart, -this.DAY_CHUNK);
+    if (this.viewMode === 'week') this.rangeStart = this.addWeeks(this.rangeStart, -this.WEEK_CHUNK);
+    if (this.viewMode === 'day') this.rangeStart = this.addDays(this.rangeStart, -this.DAY_CHUNK);
 
     setTimeout(() => {
       // adjust scrollLeft so user's viewport remains on the same content
@@ -448,7 +497,7 @@ export class Calendar implements OnInit {
       case 'day':
         return (
           this.getCurrentDayPosition()
-     
+
         );
 
       case 'week':
@@ -477,7 +526,7 @@ export class Calendar implements OnInit {
     const dayFraction = (dayOfWeek + hourOffset) / 7;
 
     return (index * this.weekColumnWidth) +
-           (dayFraction * this.weekColumnWidth);
+      (dayFraction * this.weekColumnWidth);
   }
 
   // return column width according to active view
@@ -500,7 +549,7 @@ export class Calendar implements OnInit {
       if (wo.workCenterId !== centerId) return false;
 
       const start = new Date(wo.startDate);
-      const end   = new Date(wo.endDate);
+      const end = new Date(wo.endDate);
 
       if (this.viewMode === 'month') {
         // for month view, consider any order that starts in the same month or spans it
@@ -608,7 +657,7 @@ export class Calendar implements OnInit {
   // get length of work order in current view units
   getLength(work: WorkOrder): number {
     const start = new Date(work.startDate);
-    const end   = new Date(work.endDate);
+    const end = new Date(work.endDate);
 
     switch (this.viewMode) {
       case 'month':
@@ -628,7 +677,7 @@ export class Calendar implements OnInit {
   // compute padding from "now" to work start in current view units
   getPadding(work: WorkOrder): number {
     const start = new Date(this.currentDate);
-    const end   = new Date(work.startDate);
+    const end = new Date(work.startDate);
 
     switch (this.viewMode) {
       case 'month':
@@ -670,7 +719,7 @@ export class Calendar implements OnInit {
   }
 
   // padding in days from current date to work start
-  getDayPadding(work: WorkOrder){
+  getDayPadding(work: WorkOrder) {
     return this.diffInMonths(
       this.currentDate,
       work.startDate
@@ -754,14 +803,14 @@ export class Calendar implements OnInit {
     const x = new Date(d);
     const day = x.getDay() || 7;
     x.setDate(x.getDate() - day + 1);
-    x.setHours(0,0,0,0);
+    x.setHours(0, 0, 0, 0);
     return x;
   }
 
   // return date normalized to midnight
   startOfDay(d: Date) {
     const x = new Date(d);
-    x.setHours(0,0,0,0);
+    x.setHours(0, 0, 0, 0);
     return x;
   }
 
