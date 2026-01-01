@@ -2,15 +2,15 @@ import { WorkCenter } from '../calendar/calendar.types';
 
 // Define work centers
 export const WORK_CENTERS: WorkCenter[] = [
-   { id: 'wc-assembly', name: 'Assembly Line' },
-  { id: 'wc-packaging', name: 'Packaging' },
-  { id: 'wc-quality', name: 'Quality Control' },
-  { id: 'wc-maintenance', name: 'Maintenance' },
-  { id: 'wc-logistics', name: 'Logistics' },// optional extra
+  { id: 'wc-fabrication', name: 'Fabrication' },
+  { id: 'wc-coating', name: 'Coating' },
+  { id: 'wc-inspection', name: 'Inspection' },
+  { id: 'wc-repair', name: 'Repair' },
+  { id: 'wc-shipping', name: 'Shipping' },
 ];
 
 // Work Order statuses
-export type WorkOrderStatus = 'Open' |'Blocked' | 'In_progress' | 'Complete';
+export type WorkOrderStatus = 'Open' | 'Blocked' | 'In_progress' | 'Complete';
 
 // Work Order document type
 export interface WorkOrderDocument {
@@ -28,88 +28,88 @@ export interface WorkOrderDocument {
 // Define work orders
 export const WORK_ORDERS: WorkOrderDocument[] = [
   {
-    docId: 'wo-001',
+    docId: 'wo-101',
     docType: 'workOrder',
     data: {
-      name: 'Long-Term Assembly Phase 1',
-      workCenterId: 'wc-assembly',
+      name: 'Fabrication Phase 1',
+      workCenterId: 'wc-fabrication',
       status: 'Open',
       startDate: '2025-07-01',
       endDate: '2026-01-15',
     },
   },
   {
-    docId: 'wo-002',
+    docId: 'wo-102',
     docType: 'workOrder',
     data: {
-      name: 'Long-Term Assembly Phase 2',
-      workCenterId: 'wc-assembly',
+      name: 'Fabrication Phase 2',
+      workCenterId: 'wc-fabrication',
       status: 'In_progress',
       startDate: '2026-01-20',
       endDate: '2026-08-30',
     },
   },
   {
-    docId: 'wo-003',
+    docId: 'wo-103',
     docType: 'workOrder',
     data: {
-      name: 'Extended Packaging Program',
-      workCenterId: 'wc-packaging',
+      name: 'Coating Program',
+      workCenterId: 'wc-coating',
       status: 'Complete',
       startDate: '2025-09-10',
       endDate: '2026-06-05',
     },
   },
   {
-    docId: 'wo-004',
+    docId: 'wo-104',
     docType: 'workOrder',
     data: {
-      name: 'Export Packaging Hold',
-      workCenterId: 'wc-packaging',
+      name: 'Coating Delay Hold',
+      workCenterId: 'wc-coating',
       status: 'Blocked',
       startDate: '2026-06-10',
       endDate: '2026-10-20',
     },
   },
   {
-    docId: 'wo-005',
+    docId: 'wo-105',
     docType: 'workOrder',
     data: {
-      name: 'Ongoing Quality Audits',
-      workCenterId: 'wc-quality',
+      name: 'Inspection Cycle',
+      workCenterId: 'wc-inspection',
       status: 'In_progress',
       startDate: '2025-08-01',
       endDate: '2026-03-31',
     },
   },
   {
-    docId: 'wo-006',
+    docId: 'wo-106',
     docType: 'workOrder',
     data: {
-      name: 'Preventive Maintenance Cycle',
-      workCenterId: 'wc-maintenance',
+      name: 'Scheduled Repairs',
+      workCenterId: 'wc-repair',
       status: 'Open',
       startDate: '2025-12-15',
       endDate: '2026-07-15',
     },
   },
   {
-    docId: 'wo-007',
+    docId: 'wo-107',
     docType: 'workOrder',
     data: {
-      name: 'Critical Equipment Overhaul',
-      workCenterId: 'wc-maintenance',
+      name: 'Emergency Equipment Overhaul',
+      workCenterId: 'wc-repair',
       status: 'Complete',
       startDate: '2025-06-20',
       endDate: '2025-11-05',
     },
   },
   {
-    docId: 'wo-008',
+    docId: 'wo-108',
     docType: 'workOrder',
     data: {
-      name: 'Long-Term Logistics Optimization',
-      workCenterId: 'wc-logistics',
+      name: 'Shipping Optimization',
+      workCenterId: 'wc-shipping',
       status: 'Blocked',
       startDate: '2026-02-01',
       endDate: '2026-11-30',
