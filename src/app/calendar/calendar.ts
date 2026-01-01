@@ -54,7 +54,7 @@ type ViewMode = 'month' | 'week' | 'day';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, MatGridListModule, MatListModule, NgSelectModule, SlideFormComponent, FormsModule, MatButtonModule, MatMenuModule],
+  imports: [CommonModule, MatGridListModule, MatListModule, NgSelectModule, FormsModule, SlideFormComponent, MatButtonModule, MatMenuModule],
   templateUrl: './calendar.html',
   styleUrls: ['./calendar.scss']
 })
@@ -290,6 +290,16 @@ export class Calendar implements OnInit {
       );
     });
 
+    if (overlap) {
+      // show error in the slide form, do not close
+      this.slideFormService.setError(
+        'Work order overlaps with an existing order for this work center.'
+      );
+      return; 
+    }
+
+    this.slideFormService.clearError();
+
     // ===============================
     // SAVE HERE - in-memory operations
     // ===============================
@@ -315,6 +325,8 @@ export class Calendar implements OnInit {
       });
     }
 
+    // close the form only on successful save
+    this.slideFormService.close(); // close ONLY on success
   }
 
   // toggle current time visibility

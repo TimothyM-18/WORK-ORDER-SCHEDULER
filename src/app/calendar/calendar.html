@@ -74,8 +74,9 @@
                 <td class="timeline-row" [attr.colspan]="timelineUnits.length">
                   <!-- Grid background -->
                   <div class="timeline-grid">
-                    <div class="timeline-cell" *ngFor="let unit of timelineUnits" (click)="wc.id && openSlideForm(wc.id, unit)"
-                      [style.minWidth.px]="getcolumnWidth()" [style.width.px]="getcolumnWidth()">
+                    <div class="timeline-cell" *ngFor="let unit of timelineUnits"
+                      (click)="wc.id && openSlideForm(wc.id, unit)" [style.minWidth.px]="getcolumnWidth()"
+                      [style.width.px]="getcolumnWidth()">
 
                     </div>
                   </div>
@@ -125,8 +126,6 @@
           </table>
 
         </div>
-
-        <!-- Selected cell info (optional, for now/debugging) -->
 
       </body>
     </mat-grid-tile>
