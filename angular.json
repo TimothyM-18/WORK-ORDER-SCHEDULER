@@ -3,11 +3,11 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "5a2319ec-2c6e-47f6-a807-c090d3e5ecea"
+    "analytics": "98bf140f-fadd-4915-ae2c-fef3fe805f30"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "erp": {
+    "calendar": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -33,11 +33,6 @@
             "styles": [
               "src/styles.scss"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            },
             "polyfills": [
               "@angular/localize/init"
             ]
@@ -70,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "erp:build:production"
+              "buildTarget": "calendar:build:production"
             },
             "development": {
-              "buildTarget": "erp:build:development"
+              "buildTarget": "calendar:build:development"
             }
           },
           "defaultConfiguration": "development"

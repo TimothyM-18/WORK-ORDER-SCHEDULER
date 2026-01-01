@@ -2,10 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SlideForm } from './slide-form';
 
-describe('SlideForm', () => {
+describe('SlideFormComponent', () => {
   let component: SlideForm;
   let fixture: ComponentFixture<SlideForm>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SlideForm]

@@ -5,8 +5,8 @@ import { Calendar } from './calendar/calendar';
   selector: 'app-root',
   imports: [Calendar],
   templateUrl: './app.html',
-  styleUrls: ['./app.scss']
+  styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('erp');
+  protected readonly title = signal('calendar');
 }

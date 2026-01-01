@@ -39,7 +39,7 @@ interface StatusOption {
     ])
   ]
 })
-export class SlideFormComponent {
+export class SlideForm {
   docId?: string;
 
   @Output() submitForm = new EventEmitter<{

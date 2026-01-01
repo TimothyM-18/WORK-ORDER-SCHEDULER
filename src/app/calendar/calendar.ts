@@ -12,7 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { SlideFormComponent } from '../slide-form/slide-form';
+import { SlideForm } from '../slide-form/slide-form';
 import { SlideFormService } from '../slide-form/slide-form.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -54,7 +54,7 @@ type ViewMode = 'month' | 'week' | 'day';
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [CommonModule, MatGridListModule, MatListModule, NgSelectModule, FormsModule, SlideFormComponent, MatButtonModule, MatMenuModule],
+  imports: [CommonModule, MatGridListModule, MatListModule, NgSelectModule, FormsModule, SlideForm, MatButtonModule, MatMenuModule],
   templateUrl: './calendar.html',
   styleUrls: ['./calendar.scss']
 })
@@ -228,7 +228,7 @@ export class Calendar implements OnInit {
       return;
     }
 
-    // 🟡 EDIT mode: payload is WorkOrder, pre-populate form
+    // EDIT mode: payload is WorkOrder, pre-populate form
     if (payload) {
       this.slideFormService.openForm({
         docId: payload.docId,

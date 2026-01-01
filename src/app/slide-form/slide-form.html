@@ -4,81 +4,79 @@
 <!-- Slide Form Panel -->
 <div class="slide-panel" *ngIf="isOpen" @slide>
 
-    <div class="header">
-        <div>
-            <h4>Work Order Details</h4>
-            <h5 style="color: gray;">
-                Specify the dates, name and status for the order
-            </h5>
-        </div>
-
-        <div class="actions">
-            <button type="button" class="btn btn-light" (click)="closeForm()">
-                Cancel
-            </button>
-
-            <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isOverlapping"
-                form="workOrderForm">
-                Create
-            </button>
-        </div>
+  <div class="header">
+    <div>
+      <h4>Work Order Details</h4>
+      <h5 style="color: gray;">
+        Specify the dates, name and status for the order
+      </h5>
     </div>
 
-    <mat-divider></mat-divider>
+    <div class="actions">
+      <button type="button" class="btn btn-light" (click)="closeForm()">
+        Cancel
+      </button>
 
-    <div *ngIf="formError" class="error">
-        {{ formError }}
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isOverlapping" form="workOrderForm">
+        Create
+      </button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- ERROR GOES HERE -->
+  <div *ngIf="formError" class="error">
+    {{ formError }}
+  </div>
+
+  <!-- FORM STARTS HERE -->
+  <form id="workOrderForm" [formGroup]="form" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label class="form-label">Work Order Name</label>
+      <input type="text" formControlName="name" class="form-control" placeholder="Order Name" />
+      <div class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+        Valid name is required
+      </div>
     </div>
 
-    <form id="workOrderForm" [formGroup]="form" (ngSubmit)="onSubmit()" style="margin-top: 20px;">
+    <!-- Status -->
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <ng-select [items]="statuses" bindLabel="name" bindValue="id" formControlName="status" class="status-select"
+        [searchable]="false">
+      </ng-select>
+      <div class="error" *ngIf="form.get('status')?.touched && form.get('status')?.invalid">
+        Status is required
+      </div>
+    </div>
+    <!-- End Date -->
+    <div class="mb-3">
+      <label class="form-label">End Date</label>
+      <div class="input-group">
+        <input placeholder="yyyy-mm-dd" class="form-control" ngbDatepicker formControlName="endDate"
+          #end="ngbDatepicker" />
+        <button class="btn btn-outline-secondary bi bi-calendar3" type="button" (click)="end.toggle()"></button>
 
-        <!-- Name -->
-        <div class="mb-3">
-            <label class="form-label">Work Order Name</label>
-            <input type="text" formControlName="name" class="form-control" placeholder="Order Name" />
-            <div class="error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
-                Valid name is required
-            </div>
-        </div>
+      </div>
 
-        <!-- Status -->
-        <div class="mb-3">
-            <label class="form-label">Status</label>
-            <ng-select [items]="statuses" bindLabel="name" bindValue="id" formControlName="status" class="status-select"
-                [searchable]="false">
-            </ng-select>
-            <div class="error" *ngIf="form.get('status')?.touched && form.get('status')?.invalid">
-                Status is required
-            </div>
-        </div>
-        <!-- End Date -->
-        <div class="mb-3">
-            <label class="form-label">End Date</label>
-            <div class="input-group">
-                <input placeholder="yyyy-mm-dd" class="form-control" ngbDatepicker formControlName="endDate"
-                    #end="ngbDatepicker" />
-                <button class="btn btn-outline-secondary bi bi-calendar3" type="button" (click)="end.toggle()"></button>
+      <div class="error" *ngIf="isEndDateInvalid()">
+        End date cannot be before start date
+      </div>
+    </div>
 
-            </div>
+    <!-- Start Date -->
+    <div class="mb-3">
+      <label class="form-label">Start Date</label>
+      <div class="input-group">
+        <input placeholder="yyyy-mm-dd" class="form-control" ngbDatepicker formControlName="startDate"
+          #startPicker="ngbDatepicker" />
+        <button class="btn btn-outline-secondary bi bi-calendar3" type="button" (click)="startPicker.toggle()"></button>
 
-            <div class="error" *ngIf="isEndDateInvalid()">
-                End date cannot be before start date
-            </div>
-        </div>
+      </div>
+    </div>
 
-        <!-- Start Date -->
-        <div class="mb-3">
-            <label class="form-label">Start Date</label>
-            <div class="input-group">
-                <input placeholder="yyyy-mm-dd" class="form-control" ngbDatepicker formControlName="startDate"
-                    #startPicker="ngbDatepicker" />
-                <button class="btn btn-outline-secondary bi bi-calendar3" type="button"
-                    (click)="startPicker.toggle()"></button>
-
-            </div>
-        </div>
-
-
-
-    </form>
+  </form>
 </div>

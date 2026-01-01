@@ -17,215 +17,220 @@ $shadow-xl: 0 12px 40px rgba(15, 23, 42, 0.20);
 
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.5);
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 1000;
 }
 
 .slide-panel {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: #fff;
-    padding: 20px;
-    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
-    z-index: 1001;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  padding: 20px;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  form {
+    flex: 1;
     display: flex;
     flex-direction: column;
 
-    h2 {
-        margin-top: 0;
+    label {
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
     }
 
-    form {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-
-        label {
-            margin-bottom: 10px;
-            display: flex;
-            flex-direction: column;
-        }
 
 
-
-        .error {
-            color: red;
-            font-size: 12px;
-            margin-top: 2px;
-        }
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 2px;
     }
+  }
 }
 
 .form-label {
-    color: gray;
-    font-size: 18px;
+  color: gray;
+  font-size: 18px;
 
 
 }
 
 .actions {
-    margin-top: 5px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    // background-color: aqua;
-    // width: 30%;
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  // background-color: aqua;
+  // width: 30%;
 
 }
 
 .form-control {
-    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.16);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.16);
 
-    &:focus {
-        border-color: #4F5DFF;
-        box-shadow: 0 0 0 0.2rem rgba(79, 93, 255, 0.15);
-    }
+  &:focus {
+    border-color: #4F5DFF;
+    box-shadow: 0 0 0 0.2rem rgba(79, 93, 255, 0.15);
+  }
 }
 
 .header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
 }
 
 .btn {
-    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.16);
-    height: 40px;
-    width: 80px;
-    border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.16);
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
 }
 
 .form-select {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 ::ng-deep .ng-arrow {
-    display: none;
+  display: none;
 }
 
 ::ng-deep .ng-arrow-wrapper::after {
-    content: '\F282';
-    font-family: 'bootstrap-icons';
-    font-size: 10px;
-    color: #4F5DFF;
-    font-weight: bold;
-    display: inline-block;
+  content: '\F282';
+  font-family: 'bootstrap-icons';
+  font-size: 10px;
+  color: #4F5DFF;
+  font-weight: bold;
+  display: inline-block;
 }
 
 ::ng-deep .ng-arrow-wrapper::after {
-    transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 ::ng-deep .ng-select-opened .ng-arrow-wrapper::after {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 ::ng-deep .status-select .ng-select-container {
-    border-radius: 10px;
+  border-radius: 10px;
 
-    height: 35px;
-    padding: 0.25rem;
-    //border: 1px solid #0d6efd;
-    align-items: center;
-    padding: 5px;
-    justify-content: center;
-    background-color: white;
-    color: $primary;
+  height: 35px;
+  padding: 0.25rem;
+  //border: 1px solid #0d6efd;
+  align-items: center;
+  padding: 5px;
+  justify-content: center;
+  background-color: white;
+  color: $primary;
 
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 
 }
 
 ::ng-deep .status-select {
-    border-radius: 7px;
-    width: 100%;
-    align-items: center;
-    display: flex;
-    padding: 1px;
-    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.16);
+  border-radius: 7px;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  padding: 1px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.16);
+
+
+
+
+
 
 }
 
 ::ng-deep .status-select .ng-dropdown-panel {
-    width: 100%;
-    transform: translate(0, 70%);
-    box-shadow: $shadow-lg;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: white;
+  width: 100%;
+  transform: translate(0, 70%);
+  box-shadow: $shadow-lg;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
 
 }
 
 ::ng-deep .status-select .ng-option {
-    border-radius: 10px;
+  border-radius: 10px;
 
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    background-color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: white;
 
 
-    &:hover {
-        color: #0d6efd;
+  &:hover {
+    color: #0d6efd;
 
-    }
+  }
 
 }
 
 ::ng-deep .status-select .ng-option-selected {
-    font-weight: 400;
-    color: $primary;
+  font-weight: 400;
+  color: $primary;
 
 
 }
 
 .btn-primary {
-    background-color: $primary;
+  background-color: $primary;
 }
 
 .dp-hidden {
-    width: 0;
-    margin: 0;
-    border: none;
-    padding: 0;
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
 }
 
 .custom-day {
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    display: inline-block;
-    height: 2rem;
-    width: 2rem;
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
 }
 
 .custom-day.focused {
-    background-color: #e6e6e6;
+  background-color: #e6e6e6;
 }
 
 .custom-day.range,
 .custom-day:hover {
-    background-color: rgb(2, 117, 216);
-    color: white;
+  background-color: rgb(2, 117, 216);
+  color: white;
 }
 
 .custom-day.faded {
-    background-color: rgba(2, 117, 216, 0.5);
+  background-color: rgba(2, 117, 216, 0.5);
 }
 
 .error {
-    color: #dc2626;
-    background: #fee2e2;
-    padding: 10px 12px;
-    border-radius: 6px;
-    margin-bottom: 12px;
-    font-size: 14px;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
 }
