@@ -8,7 +8,7 @@ This project implements an interactive timeline with zoom levels (Day/Week/Month
 
 ## 🚀 Demo
 
-(Include a Loom or video link here demonstrating core functionality such as timeline views, create/edit/delete flows.)
+https://www.loom.com/share/534a1560e91a4b979b26f65cae78cfa4
 
 ---
 
